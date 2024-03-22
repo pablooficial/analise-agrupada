@@ -1,0 +1,34 @@
+<div
+  class="flex justify-content-center align-items-center h-screen"
+>
+  <div class="flex flex-column gap-2 container">
+    <h2>Digite o CPF/CNPJ:</h2>
+    <form
+      [formGroup]="analysisForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-column justify-content-center align-items-center gap-1"
+    >
+      <div>
+        <input
+          type="text"
+          pInputText
+          formControlName="documentId"
+          placeholder="CPF/CNPJ"
+        />
+        <div class="error-message">
+          @if(analysisForm.get('documentId')?.touched &&
+          !analysisForm.get('documentId')?.value){
+          <span class="text-danger"> *Por favor, preencha este campo. </span>
+          }
+        </div>
+      </div>
+      <p-toast></p-toast>
+      <button
+        type="submit"
+        pButton
+        pRipple
+        label="Visualizar"
+      ></button>
+    </form>
+  </div>
+</div>

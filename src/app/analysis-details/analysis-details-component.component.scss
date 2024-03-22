@@ -1,0 +1,12 @@
+li {
+  list-style-type: none;
+}
+
+
+:host ::ng-deep{
+  p-button{
+    span{
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<div class="m-4">
+  <div class="flex justify-content-between mb-2">
+    <h1 class="mb-2">Detalhes da Análise</h1>
+    <p-button label="Voltar" icon="pi pi-arrow-left" routerLink="/analysis-entry"></p-button>
+  </div>
+  <p-accordion [activeIndex]="0">
+    <p-accordionTab header="Detalhes da Análise">
+      <div>
+        <p><strong>UUID:</strong> {{ analysisData?.uuid }}</p>
+        <p><strong>Nome da Política:</strong> {{ analysisData?.policyName }}</p>
+        <p><strong>Status:</strong> {{ analysisData?.status }}</p>
+        <p><strong>Data de Criação:</strong> {{ analysisData?.createdAt }}</p>
+        <p><strong>Total de Pontos:</strong> {{ analysisData?.totalPoints }}</p>
+        <p><strong>Recomendação:</strong> {{ analysisData?.recommendation }}</p>
+      </div>
+    </p-accordionTab>
+    @for(document of analysisData?.documents; track $index){
+    <ng-container>
+      <p-accordionTab [header]="document.name">
+        <div>
+          <p><strong>Documento:</strong> {{ document.document }}</p>
+          <ul>
+            @for(analysis of document.analysis; track $index){
+            <li>
+              <p-accordion [activeIndex]="1">
+                <p-accordionTab [header]="analysis.name">
+                  <div>
+                    <p><strong>ID:</strong> {{ analysis.id }}</p>
+                    <p><strong>Resultado:</strong> {{ analysis.result }}</p>
+                    <h5>Regras:</h5>
+                    <ul>
+                      <li *ngFor="let rule of analysis.rules.blocked">
+                        <p><strong>Nome:</strong> {{ rule.name }}</p>
+                        <p>
+                          <strong>Descrição:</strong> {{ rule.description }}
+                        </p>
+                        <p><strong>Status:</strong> {{ rule.status }}</p>
+                        <p>
+                          <strong>Data de Execução:</strong>
+                          {{ rule.executedAt }}
+                        </p>
+                        <p><strong>Resultado:</strong> {{ rule.result }}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </p-accordionTab>
+              </p-accordion>
+            </li>
+            }
+          </ul>
+        </div>
+      </p-accordionTab>
+    </ng-container>
+    }
+  </p-accordion>
+</div>
